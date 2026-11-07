@@ -11,3 +11,7 @@ Drag blocks like filter, parse datetime, regex extract, merge and group into a r
 A single self-contained page with no build step. Open `index.html` or serve the folder over HTTPS.
 
 Uses the shared suite script at `/assets/suite/handoff.js` from [jon.glass](https://jon.glass) to pass data between tools, so cross-tool handoff only works when served from jon.glass.
+
+## License
+
+MIT © 2026 [Jon Glass](https://jon.glass/). Use it however you like; just keep the copyright notice. See [LICENSE](LICENSE).
