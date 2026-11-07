@@ -1877,7 +1877,21 @@ if (typeof module !== 'undefined') module.exports = { BLOCKS: BLOCKS, RECIPES: R
     var saved = loadLocal();
     if (saved && saved.steps && saved.steps.length) { try { applyRecipe(saved); return; } catch (e) { /* fall through */ } }
     applyRecipe(clone(RECIPES[0]));
-  }).then(render, render).then(loadSrcParams);
+  }).then(render, render).then(loadSrcParams).then(receiveHandoff);
+
+  /* ?from=<tool>: a table handed over by another suite tool on jon.glass (Historian, say), see /assets/suite/handoff.js */
+  function receiveHandoff() {
+    var from = new URLSearchParams(location.search).get('from');
+    if (!from) return;
+    var clear = function () { try { history.replaceState(null, '', location.pathname + location.hash); } catch (e) { /* ignore */ } };
+    if (!window.Suite) { toast('This copy of Shifu cannot read hand-offs. Download the CSV and drop it in.'); clear(); return; }
+    return Suite.receive('shifu', from).then(function (h) {
+      var name = h.name.replace(/\.csv$/i, '') + '.csv';
+      // a fresh recipe: steps written for other columns would only error on this table
+      state.steps = []; state.name = h.name.replace(/\.csv$/i, '') + ' (from ' + h.fromName + ')'; sel = -1;
+      ingest(new File([h.bytes], name), 'source');
+    }, function (e) { toast('Could not load the hand-off: ' + e.message); }).then(clear, clear);
+  }
 
   /* ?src=<csv url> loads data from a link (a case on jon.glass/cases, say): the first becomes the recipe's
      input, any others are loaded as extra tables for joins. Same rules as Recap's ?src=. */
