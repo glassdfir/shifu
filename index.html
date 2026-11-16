@@ -225,6 +225,8 @@ textarea.token:focus { outline: none; border-color: var(--accent); }
       <button id="btn-share" class="btn" type="button">
         <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"></path><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"></path></svg>Share recipe</button>
       <button id="btn-new" class="btn" type="button">New</button>
+      <a id="btn-download-app" class="btn" href="index.html" download="shifu.html" title="Download Shifu as a single file to use offline">
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>Download</a>
     </div>
   </header>
 
@@ -1291,6 +1293,13 @@ if (typeof module !== 'undefined') module.exports = { BLOCKS: BLOCKS, RECIPES: R
   var CAT_VAR = { source: 'var(--c-source)', filter: 'var(--c-filter)', transform: 'var(--c-transform)', combine: 'var(--c-combine)', output: 'var(--c-output)' };
   var STORE_KEY = 'shifu.recipe.v1';
   var IN_ARTIFACT = !!(window.claude && window.claude.use);
+  (function () {
+    var a = document.getElementById('btn-download-app');
+    if (!a) return;
+    if (IN_ARTIFACT) { a.hidden = true; return; }
+    // Download this very page, so a saved shifu.html can be re-downloaded too.
+    a.href = location.href.split('#')[0].split('?')[0];
+  })();
 
   var state = { name: '', source: '', steps: [], tables: {} };
   var sel = -1, run = null, uid = 0, lastDrag = 0, fileTarget = null, renderTimer = null;
