@@ -53,7 +53,6 @@ code, .mono { font-family: var(--f-mono); }
 .top { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding-block: 10px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); border-bottom: 1px solid var(--line); background: var(--panel); }
 .brand { display: flex; align-items: center; gap: 10px; }
 .brand .name { font-weight: 700; font-size: 19px; letter-spacing: .3px; }
-.brand .tag { font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px; }
 .recipe-name { flex: 1 1 200px; min-width: 0; max-width: 420px; font-size: 15px; font-weight: 500; background: transparent; border: 1px solid transparent; border-radius: 6px; padding: 7px 9px; }
 .recipe-name:hover { border-color: var(--line); }
 .recipe-name:focus { border-color: var(--accent); background: var(--bg); outline: none; }
@@ -214,7 +213,6 @@ textarea.token:focus { outline: none; border-color: var(--accent); }
     <div class="brand">
       <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="3" width="16" height="4" rx="1.2"></rect><rect x="4" y="10" width="16" height="4" rx="1.2"></rect><rect x="4" y="17" width="16" height="4" rx="1.2"></rect></svg>
       <span class="name">Shifu</span>
-      <span class="tag">pandas, by blocks</span>
     </div>
     <a class="home" href="/tools/">jon.glass / Tools</a>
     <label class="sr" for="recipe-name">Recipe name</label>
